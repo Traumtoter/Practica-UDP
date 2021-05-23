@@ -30,6 +30,7 @@ public class Servidor {
         byte[] buffer = new byte[1024];
         try{
            System.out.println("servidor conectado");
+           InetAddress direccionCliente = InetAddress.getByName("Direccion del cliente.");
            DatagramSocket socketUDP = new DatagramSocket(PUERTO);
            //Ciclo para que siempre este recibiendo peticiones.
            //while(true){
