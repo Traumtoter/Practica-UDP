@@ -27,13 +27,18 @@ public class Cliente {
         final int PUERTO_SERVIDOR = 5000;
         byte[] buffer = new byte[1024];
         try{
-             InetAddress direccionServidor = InetAddress.getByName("10.0.2.15");
+             InetAddress direccionServidor = InetAddress.getByName("localhost");
              DatagramSocket socketUDP = new DatagramSocket();
              Scanner teclado = new Scanner(System.in);
              String mensaje;
              System.out.println("INTRODUZCA UN MSJ PARA EL SERVIDOR (EXIT PARA SALIR)");
              mensaje = teclado.nextLine();
              buffer = mensaje.getBytes();
+             if(mensaje.isEmpty() || mensaje == null){
+                 System.out.println("Proceso terminado, MENSAJE VACIO.\n");
+                 socketUDP.close();
+                 //break;
+             }
              DatagramPacket pregunta = new DatagramPacket(buffer, buffer.length, direccionServidor, PUERTO_SERVIDOR);
              System.out.println("El mensaje se esta enviando al servidor");
              socketUDP.send(pregunta);
